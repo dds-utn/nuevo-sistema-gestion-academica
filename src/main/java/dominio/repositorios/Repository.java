@@ -1,8 +1,7 @@
-package dominio.Repositorios;
+package dominio.repositorios;
 
-import dominio.Repositorios.daos.IDAO;
+import dominio.repositorios.daos.IDAO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Repository<T> {
