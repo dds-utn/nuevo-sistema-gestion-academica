@@ -8,11 +8,15 @@ import java.util.List;
 
 public class AsignadorDocenteFactory {
 
-    public static AsignadorDeDocente obtenerAsignador(String nombre, List<Docente> docentes){
+    public static AsignadorDeDocente obtenerAsignador(String nombre, List<Docente> docentes) {
         AsignadorDeDocente asignador;
-        switch (nombre){
-            case "menorDisponibilidad": asignador = new PorMayorDisponibilidad(docentes); break;
-            default: asignador = new PorMayorDisponibilidad(docentes); break;
+        switch (nombre) {
+            case "menorDisponibilidad":
+                asignador = new PorMayorDisponibilidad(docentes);
+                break;
+            default:
+                asignador = new PorMayorDisponibilidad(docentes);
+                break;
         }
         return asignador;
     }

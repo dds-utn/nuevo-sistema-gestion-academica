@@ -21,8 +21,7 @@ public class Alumno {
     }
 
     /**
-     *  Getters and setters
-     *
+     * Getters and setters
      */
     public String getNombre() {
         return nombre;
@@ -52,8 +51,7 @@ public class Alumno {
         return puntaje;
     }
 
-    public int getPuntajeAsInt()
-    {
+    public int getPuntajeAsInt() {
         return this.puntaje.intValue();
     }
 
@@ -71,10 +69,8 @@ public class Alumno {
 
     /**
      *
-     *
      */
-    public Boolean tenesCurso(Curso curso)
-    {
+    public Boolean tenesCurso(Curso curso) {
         return this.cursos.contains(curso);
     }
 

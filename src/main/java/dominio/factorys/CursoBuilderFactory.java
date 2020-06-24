@@ -11,17 +11,15 @@ public class CursoBuilderFactory {
     private Integer maximoDeAlumnos;
     private List<Docente> docentes;
     private String algoritmoSelectorDeAlumnos = "puntajeMayor";
-    private String algoritmoAsignadorDocente  = "menorDisponibilidad";
+    private String algoritmoAsignadorDocente = "menorDisponibilidad";
 
-    public CursoBuilderFactory(List<Docente> docentes)
-    {
+    public CursoBuilderFactory(List<Docente> docentes) {
         this.minimoDeAlumnos = 2;
         this.maximoDeAlumnos = 10;
         this.docentes = docentes;
     }
 
-    public CursoBuilder createBuilder()
-    {
+    public CursoBuilder createBuilder() {
         CursoBuilder builder = new CursoBuilder();
 
         builder.setSelectorDeAlumnos(SelectorDeAlumnosFactory.obtenerSelector(this.algoritmoSelectorDeAlumnos));
@@ -33,14 +31,11 @@ public class CursoBuilderFactory {
     }
 
 
-
-    public void setMinimoDeAlumnos(Integer minimo)
-    {
+    public void setMinimoDeAlumnos(Integer minimo) {
         this.minimoDeAlumnos = minimo;
     }
 
-    public void setMaximoDeAlumnos(Integer maximo)
-    {
+    public void setMaximoDeAlumnos(Integer maximo) {
         this.maximoDeAlumnos = maximo;
     }
 
@@ -52,13 +47,11 @@ public class CursoBuilderFactory {
         this.algoritmoSelectorDeAlumnos = algoritmoSelectorDeAlumnos;
     }
 
-    private Integer getMinimoDeAlumnos()
-    {
+    private Integer getMinimoDeAlumnos() {
         return this.minimoDeAlumnos; // puede salir de un config
     }
 
-    private Integer getMaximoDeAlumnos()
-    {
+    private Integer getMaximoDeAlumnos() {
         return this.maximoDeAlumnos; // puede salir de un config
     }
 

@@ -22,8 +22,7 @@ public class CicloLectivo {
         this.anio = anio;
     }
 
-    public Boolean sosCicloActual()
-    {
-        return LocalDate.now().getYear() == this.getAnio() ;
+    public Boolean sosCicloActual() {
+        return LocalDate.now().getYear() == this.getAnio();
     }
 }

@@ -19,11 +19,10 @@ public class Docente {
     private List<Discapacidad> discapacidadesTratadas;
     private List<Curso> cursos;
 
-    public Docente()
-    {
-        this.materiasDeInteres      = new ArrayList<>();
-        this.cursos                 = new ArrayList<>();
-        this.materiasDictadas       = new ArrayList<>();
+    public Docente() {
+        this.materiasDeInteres = new ArrayList<>();
+        this.cursos = new ArrayList<>();
+        this.materiasDictadas = new ArrayList<>();
         this.discapacidadesTratadas = new ArrayList<>();
     }
 
@@ -56,32 +55,29 @@ public class Docente {
         return this.materiasDeInteres;
     }
 
-    public void agregarMateriasDeInteres(Materia ... materias) {
+    public void agregarMateriasDeInteres(Materia... materias) {
         this.materiasDeInteres.addAll(Arrays.asList(materias));
     }
 
-    public void agregarCursos(Curso ... curso)
-    {
+    public void agregarCursos(Curso... curso) {
         this.cursos.addAll(Arrays.asList(curso));
     }
 
-    public void agregarDiscapacidadConHabilidad(Discapacidad ... discapacidades) {
+    public void agregarDiscapacidadConHabilidad(Discapacidad... discapacidades) {
         this.discapacidadesTratadas.addAll(Arrays.asList(discapacidades));
     }
 
     /**
-     *  Functions! :D
+     * Functions! :D
      */
-    public Boolean estasDisponible(Dia unDia, Turno unTurno)
-    {
-        return unDia == null || unTurno == null?
+    public Boolean estasDisponible(Dia unDia, Turno unTurno) {
+        return unDia == null || unTurno == null ?
                 false :
                 this.getCursos().stream().noneMatch(curso ->
                         (curso.getDia().equals(unDia)) && (curso.getTurno().equals(unTurno)));
     }
 
-    public Boolean dictasMateria(Materia materia)
-    {
+    public Boolean dictasMateria(Materia materia) {
         return this.materiasDeInteres.contains(materia);
     }
 

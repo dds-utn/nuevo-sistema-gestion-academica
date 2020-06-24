@@ -17,13 +17,12 @@ public class Curso {
     private Turno turno;
 
     public Curso() {
-        this.alumnos    = new ArrayList<>();
-        this.ayudantes  = new ArrayList<>();
+        this.alumnos = new ArrayList<>();
+        this.ayudantes = new ArrayList<>();
     }
 
     /**
-     *  Getters and setters
-     *
+     * Getters and setters
      */
     public String getTitulo() {
         return titulo;
@@ -97,7 +96,7 @@ public class Curso {
         this.getAlumnos().add(alumno);
     }
 
-    public void agregarAyudantes(Ayudante ... ayudantes) {
+    public void agregarAyudantes(Ayudante... ayudantes) {
         Collections.addAll(this.ayudantes, ayudantes);
     }
 
@@ -106,18 +105,18 @@ public class Curso {
     }
 
     /**
-     *  Functions! :D
+     * Functions! :D
      */
 
-    public Boolean estasActivo()
-    {
+    public Boolean estasActivo() {
         return this.getCicloLectivo().sosCicloActual();
     }
 
-    public Integer cantidadAlumnos() {return this.getAlumnos().size();}
+    public Integer cantidadAlumnos() {
+        return this.getAlumnos().size();
+    }
 
-    public Boolean tenesAlumno(Alumno alumno)
-    {
+    public Boolean tenesAlumno(Alumno alumno) {
         return this.getAlumnos().contains(alumno);
     }
 }

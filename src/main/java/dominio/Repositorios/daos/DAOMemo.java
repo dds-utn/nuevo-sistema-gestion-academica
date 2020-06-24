@@ -3,12 +3,11 @@ package dominio.Repositorios.daos;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DAOMemo<T> implements IDAO<T>{
+public class DAOMemo<T> implements IDAO<T> {
 
     private List<T> data;
 
-    public DAOMemo()
-    {
+    public DAOMemo() {
         this.data = new ArrayList<T>();
     }
 

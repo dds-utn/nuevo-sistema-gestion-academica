@@ -18,15 +18,13 @@ public class CursoBuilder {
     private SelectorDeAlumnos selectorDeAlumnos;
     private AsignadorDeDocente asignadorDeDocente;
 
-    public CursoBuilder()
-    {
+    public CursoBuilder() {
         this.curso = new Curso();
     }
 
     /**
-     *  Getters and setters
-     *
-    */
+     * Getters and setters
+     */
     public Integer getCapacidadAlumnos() {
         return capacidadAlumnos;
     }
@@ -64,29 +62,26 @@ public class CursoBuilder {
     }
 
     /**
-     *  Functions! :D
-     *
-    */
+     * Functions! :D
+     */
 
-    public CursoBuilder agregarTitulo(String titulo)
-    {
+    public CursoBuilder agregarTitulo(String titulo) {
         this.curso.setTitulo(titulo);
         return this;
     }
 
-    public CursoBuilder agregarMateria(Materia materia)
-    {
+    public CursoBuilder agregarMateria(Materia materia) {
         this.curso.setMateria(materia);
         return this;
     }
 
-    public CursoBuilder agregarCicloLectivo(CicloLectivo ciclo) throws ExcepcionDeCreacionDeCurso
-    {
-        if(ciclo == null){ throw new ExcepcionDeCreacionDeCurso("No es un ciclo lectivo valido "); }
+    public CursoBuilder agregarCicloLectivo(CicloLectivo ciclo) throws ExcepcionDeCreacionDeCurso {
+        if (ciclo == null) {
+            throw new ExcepcionDeCreacionDeCurso("No es un ciclo lectivo valido ");
+        }
 
         Integer añoActual = LocalDate.now().getYear();
-        if(añoActual.intValue() != ciclo.getAnio().intValue())
-        {
+        if (añoActual.intValue() != ciclo.getAnio().intValue()) {
             throw new ExcepcionDeCreacionDeCurso("No es un ciclo lectivo valido ");
         }
 
@@ -95,60 +90,52 @@ public class CursoBuilder {
         return this;
     }
 
-    public CursoBuilder agregarDocente() throws ExcepcionDeCreacionDeCurso{
+    public CursoBuilder agregarDocente() throws ExcepcionDeCreacionDeCurso {
 
         try {
             this.getAsignadorDeDocente().asignarDocente(this.curso);
-        }
-        catch(ExcepcionDeAsignadorDeDocente ex)
-        {
+        } catch (ExcepcionDeAsignadorDeDocente ex) {
             throw new ExcepcionDeCreacionDeCurso(ex.getMessage());
         }
 
         return this;
     }
 
-    public CursoBuilder agregarDocente(Docente docente) throws ExcepcionDeCreacionDeCurso
-    {
-        if(docente == null){ throw new ExcepcionDeCreacionDeCurso("No es un docente valido ");}
+    public CursoBuilder agregarDocente(Docente docente) throws ExcepcionDeCreacionDeCurso {
+        if (docente == null) {
+            throw new ExcepcionDeCreacionDeCurso("No es un docente valido ");
+        }
 
         try {
             this.getAsignadorDeDocente().asignarDocente(this.curso, docente);
-        }
-        catch(ExcepcionDeAsignadorDeDocente ex)
-        {
+        } catch (ExcepcionDeAsignadorDeDocente ex) {
             throw new ExcepcionDeCreacionDeCurso(ex.getMessage());
         }
         return this;
     }
 
-    public CursoBuilder agregarDia(Dia dia)
-    {
+    public CursoBuilder agregarDia(Dia dia) {
         this.curso.setDia(dia);
 
         return this;
     }
 
-    public CursoBuilder agregarTurno(Turno turno)
-    {
+    public CursoBuilder agregarTurno(Turno turno) {
         this.curso.setTurno(turno);
         return this;
     }
 
-    public CursoBuilder agregarHoraDeInicio(LocalTime hora)
-    {
+    public CursoBuilder agregarHoraDeInicio(LocalTime hora) {
         this.curso.setHoraInicio(hora);
         return this;
     }
 
-    public CursoBuilder agregarAyudantes(Ayudante ayudantes)
-    {
+    public CursoBuilder agregarAyudantes(Ayudante ayudantes) {
         this.curso.agregarAyudantes(ayudantes);
         return this;
     }
 
-    public CursoBuilder agregarAlumnos(Alumno ... _alumnos) throws ExcepcionDeCreacionDeCurso
-    {
+    public CursoBuilder agregarAlumnos(Alumno... _alumnos) throws ExcepcionDeCreacionDeCurso {
         List<Alumno> alumnos = Arrays.asList(_alumnos);
         verificarAlumnosInscriptos(alumnos);
 
@@ -163,72 +150,62 @@ public class CursoBuilder {
         return this;
     }
 
-    public Curso build() throws ExcepcionDeCreacionDeCurso{
-        if(this.esNull(this.curso::getDocente))
-        {
+    public Curso build() throws ExcepcionDeCreacionDeCurso {
+        if (this.esNull(this.curso::getDocente)) {
             throw new ExcepcionDeCreacionDeCurso("No hay docente asignado");
         }
 
-        if(!this.tieneMinimoDeAlumnos())
-        {
+        if (!this.tieneMinimoDeAlumnos()) {
             throw new ExcepcionDeCreacionDeCurso("No se alcanzó la mínima cantidad de alumnos");
         }
 
-        if(this.esNull(this.curso::getCicloLectivo))
-        {
+        if (this.esNull(this.curso::getCicloLectivo)) {
             throw new ExcepcionDeCreacionDeCurso("No se asignó el ciclo lectivo");
         }
 
-        if(this.esNull(this.curso::getMateria))
-        {
+        if (this.esNull(this.curso::getMateria)) {
             throw new ExcepcionDeCreacionDeCurso("No se asignó la materia");
         }
 
-        if(this.esNull(this.curso::getTitulo))
-        {
+        if (this.esNull(this.curso::getTitulo)) {
             throw new ExcepcionDeCreacionDeCurso("No se asignó el titulo al cursoo");
         }
 
-        if(this.esNull(this.curso::getDia))
-        {
+        if (this.esNull(this.curso::getDia)) {
             throw new ExcepcionDeCreacionDeCurso("No se asignó el dia del curso");
         }
 
-        if(this.esNull(this.curso::getTurno))
-        {
+        if (this.esNull(this.curso::getTurno)) {
             throw new ExcepcionDeCreacionDeCurso("No se especificó el turno");
         }
 
-        if(this.esNull(this.curso::getHoraInicio))
-        {
+        if (this.esNull(this.curso::getHoraInicio)) {
             throw new ExcepcionDeCreacionDeCurso("No se especificó el horario de inicio");
         }
 
         return this.curso;
     }
+
     /**
-     *  private Functions! c:
-     *
+     * private Functions! c:
      */
 
     private void verificarAlumnosInscriptos(List<Alumno> alumnos) throws ExcepcionDeCreacionDeCurso {
         boolean algunoYaEstaInscripto = alumnos.stream().anyMatch(alumno -> alumno.tenesCurso(this.curso));
-        if(algunoYaEstaInscripto)
+        if (algunoYaEstaInscripto)
             throw new ExcepcionDeCreacionDeCurso("Algunos alumnos ya estan inscriptos a este curso!");
     }
 
     private void verificarCapacidadMaxima(List<Alumno> alumnos, int cuposDisponibles) throws ExcepcionDeCreacionDeCurso {
-        if( cuposDisponibles <= 0)
+        if (cuposDisponibles <= 0)
             throw new ExcepcionDeCreacionDeCurso("El Curso ya alcanzó su capacidad maxima!");
     }
 
-    private Boolean esNull(Supplier<Object> callback)
-    {
+    private Boolean esNull(Supplier<Object> callback) {
         return callback.get() == null;
     }
 
-    private Boolean tieneMinimoDeAlumnos()
-    {
+    private Boolean tieneMinimoDeAlumnos() {
         return this.curso.cantidadAlumnos() >= this.getCantidadMinimaAlumnos();
     }
 

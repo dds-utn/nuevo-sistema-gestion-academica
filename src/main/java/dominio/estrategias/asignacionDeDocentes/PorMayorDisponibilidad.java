@@ -1,6 +1,5 @@
 package dominio.estrategias.asignacionDeDocentes;
 
-import dominio.Repositorios.Repository;
 import dominio.entidades.Curso;
 import dominio.entidades.Docente;
 
@@ -20,9 +19,8 @@ public class PorMayorDisponibilidad extends AsignadorDeDocente {
     }
 
     @Override
-    protected Docente seleccionarDocente(List<Docente> docentesOrdenados){
+    protected Docente seleccionarDocente(List<Docente> docentesOrdenados) {
         Docente docenteSeleccionado = docentesOrdenados.get(0);
-
         return docenteSeleccionado;
     }
 
