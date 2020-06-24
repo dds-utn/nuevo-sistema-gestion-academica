@@ -113,11 +113,11 @@ public class Curso {
     {
         return this.getCicloLectivo().sosCicloActual();
     }
+
     public Integer cantidadAlumnos() {return this.getAlumnos().size();}
+
     public Boolean tenesAlumno(Alumno alumno)
     {
         return this.getAlumnos().contains(alumno);
     }
-
-
 }

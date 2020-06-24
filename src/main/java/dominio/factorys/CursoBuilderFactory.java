@@ -1,10 +1,7 @@
 package dominio.factorys;
 
-import dominio.Repositorios.Repository;
 import dominio.builders.CursoBuilder;
 import dominio.entidades.Docente;
-import dominio.estrategias.asignacionDeAlumnos.PuntajeMayor;
-import dominio.estrategias.asignacionDeDocentes.PorMenorDisponibilidad;
 
 import java.util.List;
 

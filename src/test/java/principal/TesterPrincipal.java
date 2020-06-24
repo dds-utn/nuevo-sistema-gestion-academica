@@ -5,7 +5,6 @@ import dominio.Repositorios.daos.DAOMemo;
 import dominio.builders.CursoBuilder;
 import dominio.builders.ExcepcionDeCreacionDeCurso;
 import dominio.entidades.*;
-import dominio.factorys.AsignadorDocenteFactory;
 import dominio.factorys.CursoBuilderFactory;
 import org.junit.Assert;
 import org.junit.Before;

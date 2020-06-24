@@ -17,12 +17,12 @@ public class PorMenorDisponibilidad extends AsignadorDeDocente {
     @Override
     public void asignarDocente(Curso curso) throws ExcepcionDeAsignadorDeDocente {
 
-        List<Docente> docentes = super.docentesDisponibles(curso); //puede tirar excepcion excepcion
+        List<Docente> docentes = super.docentesDisponibles(curso);
 
         Docente docenteSeleccionado = Collections.min(docentes,
-                Comparator.comparing(docente -> docente.cantidadCursos())
+                Comparator.comparing(Docente::cantidadCursos)
         );
 
-        super.asignarDocente(curso,docenteSeleccionado); //puede tirar excepcion, pero nunca lo va a hacer
+        super.asignarDocente(curso,docenteSeleccionado);
     }
 }

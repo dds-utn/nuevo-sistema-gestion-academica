@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Docente {
-
     private String nombre;
     private String apellido;
     private LocalDate fechaDeNacimiento;
@@ -45,7 +44,7 @@ public class Docente {
     }
 
     public List<Curso> getCursos() {
-        return this.cursos.stream().filter(curso -> curso.estasActivo())
+        return this.cursos.stream().filter(Curso::estasActivo)
                 .collect(Collectors.toList());
     }
 
@@ -75,14 +74,10 @@ public class Docente {
      */
     public Boolean estasDisponible(Dia unDia, Turno unTurno)
     {
-        if((unDia == null) || (unTurno == null))
-        {
-            return false;
-        }
-
-        return this.getCursos().stream().noneMatch(curso ->
-                (curso.getDia() == unDia) && (curso.getTurno() == unTurno)
-        );
+        return unDia == null || unTurno == null?
+                false :
+                this.getCursos().stream().noneMatch(curso ->
+                        (curso.getDia().equals(unDia)) && (curso.getTurno().equals(unTurno)));
     }
 
     public Boolean dictasMateria(Materia materia)
