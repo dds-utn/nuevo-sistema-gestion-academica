@@ -36,7 +36,7 @@ public class TesterPrincipal {
         this.algebra = new Materia();
         algebra.setNombre("Algebra");
 
-        /** CiclosElectivos */
+        /** CiclosLectivos */
         this.cicloActual = new CicloLectivo();
         cicloActual.setAnio(LocalDate.now().getYear());
 
@@ -90,7 +90,7 @@ public class TesterPrincipal {
 
         nuevoCurso = cursoBuilder.agregarTitulo("Un Curso los miercoles a la noche De Diseño")
                     .agregarDia(Dia.MIERCOLES)
-                    .agregarCicloElectivo(this.cicloActual) //ciclo 2020
+                    .agregarCicloLectivo(this.cicloActual) //ciclo 2020
                     .agregarTurno(Turno.NOCHE)
                     .agregarHoraDeInicio(LocalTime.parse("19:30:00"))
                     .agregarMateria(this.diseño) //diseño
@@ -132,7 +132,7 @@ public class TesterPrincipal {
 
         Curso nuevoCurso = builder.agregarTitulo("Un Curso los miercoles a la noche De Diseño")
                 .agregarDia(Dia.MIERCOLES)
-                .agregarCicloElectivo(this.cicloActual) //ciclo 2020
+                .agregarCicloLectivo(this.cicloActual) //ciclo 2020
                 .agregarMateria(this.diseño) //diseño
                 .agregarDocente() //vamos a agregar uno mediante el algoritmo automatico
                 .agregarAlumnos(this.lalo) // el minimo es dos

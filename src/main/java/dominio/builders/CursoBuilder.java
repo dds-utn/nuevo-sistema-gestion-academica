@@ -80,7 +80,7 @@ public class CursoBuilder {
         return this;
     }
 
-    public CursoBuilder agregarCicloElectivo(CicloLectivo ciclo) throws ExcepcionDeCreacionDeCurso
+    public CursoBuilder agregarCicloLectivo(CicloLectivo ciclo) throws ExcepcionDeCreacionDeCurso
     {
         Integer añoActual = LocalDate.now().getYear();
         if(añoActual.intValue() != ciclo.getAnio().intValue())
