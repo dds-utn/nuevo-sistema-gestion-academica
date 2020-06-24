@@ -40,3 +40,10 @@ Hemos llegado a la última iteración. En esta sección, debemos pensar en cómo
 	- Materia
 	- Día
 	- Turno
+	
+## Quinta iteración: Cambios en el diseño e implementación de Asignaciones Docentes
+No han avisado, un poco tarde, que todos los algoritmos de asignación docente deben respetar algunos pasos:
+- Buscar los docentes candidatos: los docentes candidatos para un curso serán aquellos que estén interesados en dictar la materia.
+- Ordenar a los docentes: cada algoritmo decidirá la forma en que ordenará a los docentes candidatos. Por ejemplo, un algoritmo podría ordenarlos por orden alfabético según su apellido.
+- Seleccionar al docente: cada algoritmo decidirá qué docente de los anteriormente ordenados seleccionará. Por ejemplo, un algoritmo podría seleccionar un docente al azar.
+- Asignar al curso el docente que fue seleccionado
