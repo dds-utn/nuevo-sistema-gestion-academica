@@ -16,7 +16,7 @@ public class PorMayorDisponibilidad extends AsignadorDeDocente {
 
     @Override
     protected void ordenarDocentes(List<Docente> docentes) {
-        Collections.sort(docentes, Comparator.comparing(docente -> docente.cantidadCursos()));
+        Collections.sort(docentes, Comparator.comparing(Docente::cantidadCursos));
     }
 
     @Override

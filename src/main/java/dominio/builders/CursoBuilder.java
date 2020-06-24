@@ -80,12 +80,14 @@ public class CursoBuilder {
         return this;
     }
 
-    public CursoBuilder agregarCicloElectivo(CicloLectivo ciclo) throws ExcepcionDeCreacionDeCurso
+    public CursoBuilder agregarCicloLectivo(CicloLectivo ciclo) throws ExcepcionDeCreacionDeCurso
     {
+        if(ciclo == null){ throw new ExcepcionDeCreacionDeCurso("No es un ciclo lectivo valido "); }
+
         Integer añoActual = LocalDate.now().getYear();
         if(añoActual.intValue() != ciclo.getAnio().intValue())
         {
-            throw new ExcepcionDeCreacionDeCurso("No es un ciclo electivo valido ");
+            throw new ExcepcionDeCreacionDeCurso("No es un ciclo lectivo valido ");
         }
 
         this.curso.setCicloLectivo(ciclo);
@@ -108,6 +110,7 @@ public class CursoBuilder {
 
     public CursoBuilder agregarDocente(Docente docente) throws ExcepcionDeCreacionDeCurso
     {
+        if(docente == null){ throw new ExcepcionDeCreacionDeCurso("No es un docente valido ");}
 
         try {
             this.getAsignadorDeDocente().asignarDocente(this.curso, docente);
@@ -147,45 +150,33 @@ public class CursoBuilder {
     public CursoBuilder agregarAlumnos(Alumno ... _alumnos) throws ExcepcionDeCreacionDeCurso
     {
         List<Alumno> alumnos = Arrays.asList(_alumnos);
+        verificarAlumnosInscriptos(alumnos);
 
-        Boolean algunoYaEstaInscripto = alumnos.stream().anyMatch(alumno -> alumno.tenesCurso(this.curso));
-        if(algunoYaEstaInscripto)
-        {
-            throw new ExcepcionDeCreacionDeCurso("Un/Unos Alumnos ya estan inscriptos a este curso!");
-        }
+        int cuposDisponibles = this.getCapacidadAlumnos() - this.curso.cantidadAlumnos();
+        cuposDisponibles = Math.max(cuposDisponibles, 0);
 
-        Integer cuposDisponibles = this.getCapacidadAlumnos() - this.curso.cantidadAlumnos();
+        verificarCapacidadMaxima(alumnos, cuposDisponibles);
 
-        /**checkeo por las dudas, no es necesario si usamos el builder!*/
-        cuposDisponibles = cuposDisponibles < 0 ? 0 : cuposDisponibles;
-
-        if( cuposDisponibles <= 0)
-        {
-            throw new ExcepcionDeCreacionDeCurso("El Curso ya alcanzo su capacidad maxima!");
-        }
-
-        List<Alumno> alumnosSeleccionados =
-                this.selectorDeAlumnos.seleccionar(alumnos, cuposDisponibles);
+        List<Alumno> alumnosSeleccionados = this.selectorDeAlumnos.seleccionar(alumnos, cuposDisponibles);
 
         this.curso.agregarAlumnos(alumnosSeleccionados);
-
         return this;
     }
 
     public Curso build() throws ExcepcionDeCreacionDeCurso{
         if(this.esNull(this.curso::getDocente))
         {
-            throw new ExcepcionDeCreacionDeCurso("No tiene docente asignado");
+            throw new ExcepcionDeCreacionDeCurso("No hay docente asignado");
         }
 
         if(!this.tieneMinimoDeAlumnos())
         {
-            throw new ExcepcionDeCreacionDeCurso("No hay la minima cantidad de alumnos");
+            throw new ExcepcionDeCreacionDeCurso("No se alcanzó la mínima cantidad de alumnos");
         }
 
         if(this.esNull(this.curso::getCicloLectivo))
         {
-            throw new ExcepcionDeCreacionDeCurso("No se asignó el ciclo electivo");
+            throw new ExcepcionDeCreacionDeCurso("No se asignó el ciclo lectivo");
         }
 
         if(this.esNull(this.curso::getMateria))
@@ -205,12 +196,12 @@ public class CursoBuilder {
 
         if(this.esNull(this.curso::getTurno))
         {
-            throw new ExcepcionDeCreacionDeCurso("No se especifico el turno");
+            throw new ExcepcionDeCreacionDeCurso("No se especificó el turno");
         }
 
         if(this.esNull(this.curso::getHoraInicio))
         {
-            throw new ExcepcionDeCreacionDeCurso("No se especifico el horario de inicio");
+            throw new ExcepcionDeCreacionDeCurso("No se especificó el horario de inicio");
         }
 
         return this.curso;
@@ -219,6 +210,18 @@ public class CursoBuilder {
      *  private Functions! c:
      *
      */
+
+    private void verificarAlumnosInscriptos(List<Alumno> alumnos) throws ExcepcionDeCreacionDeCurso {
+        boolean algunoYaEstaInscripto = alumnos.stream().anyMatch(alumno -> alumno.tenesCurso(this.curso));
+        if(algunoYaEstaInscripto)
+            throw new ExcepcionDeCreacionDeCurso("Algunos alumnos ya estan inscriptos a este curso!");
+    }
+
+    private void verificarCapacidadMaxima(List<Alumno> alumnos, int cuposDisponibles) throws ExcepcionDeCreacionDeCurso {
+        if( cuposDisponibles <= 0)
+            throw new ExcepcionDeCreacionDeCurso("El Curso ya alcanzó su capacidad maxima!");
+    }
+
     private Boolean esNull(Supplier<Object> callback)
     {
         return callback.get() == null;

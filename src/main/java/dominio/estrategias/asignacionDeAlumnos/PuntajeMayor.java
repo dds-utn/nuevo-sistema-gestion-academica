@@ -8,12 +8,6 @@ import java.util.Comparator;
 import java.util.List;
 
 public class PuntajeMayor implements SelectorDeAlumnos {
-
-    public PuntajeMayor()
-    {
-
-    }
-
     @Override
     public List<Alumno> seleccionar(List<Alumno> _alumnos, Integer cantidad) {
 
@@ -24,7 +18,7 @@ public class PuntajeMayor implements SelectorDeAlumnos {
 
         Integer cantidadSublista = cantidad - 1;
 
-        cantidadSublista = cantidadSublista > alumnos.size() ? alumnos.size() : cantidadSublista; //para no pasarnos
+        cantidadSublista = cantidadSublista > alumnos.size() ? alumnos.size() : cantidadSublista;
 
         List<Alumno> alumnosSeleccionados = alumnos.subList(0, cantidadSublista);
 
